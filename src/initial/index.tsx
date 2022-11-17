@@ -1,16 +1,22 @@
-import React, { Component } from "react";
-import { Container, Paragraph } from "./styles";
+import React, { Component, useState } from "react";
+import { Container, Paragraph, Button } from "./styles";
 import { Link } from "react-router-dom";
 
-class Initial extends Component {
-  render(): React.ReactNode {
-    return (
-      <Container data-testid="teste">
-        <Paragraph>Initial Test</Paragraph>
-        <Link to="/second">Second</Link>
-      </Container>
-    );
-  }
-}
+const Initial = (): JSX.Element => {
+  const [test, setTest] = useState("");
+
+  const onClickLink = () => {
+    setTest("button clicked");
+  };
+
+  return (
+    <Container data-testid="teste">
+      <Paragraph>Initial Test</Paragraph>
+      <Link to="/second">Second</Link>
+      <Button onClick={onClickLink}>Click here</Button>
+      {test && <Paragraph>{test}</Paragraph>}
+    </Container>
+  );
+};
 
 export default Initial;
