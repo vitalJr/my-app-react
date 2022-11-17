@@ -5,3 +5,6 @@ Container.displayName = "ContainerInitial";
 
 export const Paragraph = styled.p``;
 Paragraph.displayName = "ParagraphInitial";
+
+export const Button = styled.button``;
+Button.displayName = "ButtonInitial";

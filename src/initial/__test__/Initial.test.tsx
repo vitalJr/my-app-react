@@ -1,7 +1,7 @@
-import { create, ReactTestRenderer } from "react-test-renderer";
+import { act, create, ReactTestRenderer } from "react-test-renderer";
 import { MemoryRouter as Router, Link } from "react-router-dom";
 import Initial from "../index";
-import { Container, Paragraph } from "../styles";
+import { Button, Container, Paragraph } from "../styles";
 
 let wrapper: ReactTestRenderer;
 let root: ReactTestRenderer["root"];
@@ -28,5 +28,14 @@ describe("Initial Test", () => {
     expect(root.findAllByType(Container)).toHaveLength(1);
     expect(root.findAllByType(Paragraph)).toHaveLength(1);
     expect(root.findAllByType(Link)).toHaveLength(1);
+  });
+
+  it("test click", () => {
+    const buttonElement = root.findAllByType(Button);
+    act(() => {
+      buttonElement[0].props.onClick();
+    });
+
+    expect(root.findAllByType(Paragraph)).toHaveLength(2);
   });
 });
