@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Paragraph,
@@ -6,23 +6,40 @@ import {
   ContainerButton,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { get } from "./initial.service";
 
 const Initial = (): JSX.Element => {
   const [test, setTest] = useState("");
+  const [listTest, setListTest] = useState([]);
 
   const onClickLink = () => {
     setTest("button clicked");
   };
 
+  const getTest = async (): Promise<void> => {
+    const list = await get();
+    setListTest(list);
+  };
+
+  console.log(listTest);
+
   return (
-    <Container data-testid="teste" backgroundColor="#F2F">
+    <Container backgroundColor="#F2F2F2">
       <Paragraph>Initial Test</Paragraph>
       <Link to="/second">Second</Link>
       <ContainerButton>
-        <ButtonInitial onClick={onClickLink}>Click here</ButtonInitial>
+        <ButtonInitial
+          id="teste"
+          onClick={() => {
+            onClickLink();
+            getTest();
+          }}
+        >
+          Click here
+        </ButtonInitial>
       </ContainerButton>
 
-      {test && <Paragraph>{test}</Paragraph>}
+      {listTest && listTest.length > 0 && <Paragraph>{test}</Paragraph>}
     </Container>
   );
 };
