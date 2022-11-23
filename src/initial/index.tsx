@@ -6,7 +6,7 @@ import {
   ContainerButton,
 } from "./styles";
 import { Link } from "react-router-dom";
-import { get } from "./initial.service";
+import { get, testFetch } from "./initial.service";
 
 const Initial = (): JSX.Element => {
   const [test, setTest] = useState("");
@@ -17,7 +17,8 @@ const Initial = (): JSX.Element => {
   };
 
   const getTest = async (): Promise<void> => {
-    const list = await get();
+    // const list = await get();
+    const list = await testFetch();
     setListTest(list);
   };
 
